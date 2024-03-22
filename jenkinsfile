@@ -1,0 +1,22 @@
+pipeline{
+    agent any
+    tools{
+      maven 'maven'
+    }
+    stages{
+       stage ('checkout_sce')}
+       steps{
+           checkout sce
+      }
+      }
+     stage ('Maven_Build'){
+     steps{
+         sh 'mvn clean package'
+     }
+     }
+     stage ('Docker Build'){
+     steps{
+        sh 'sudo docker build -t java-docker-build:v1, -5'
+        sh 'sudo docker run name java-docker-build cl -p 8019:8123 d java-docker-build:w1'
+     }
+     }
